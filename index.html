@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidadania Digital & IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container flex-header">
+            <div class="logo">Cidadania<span>Digital</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#deepfakes">Deepfakes</a></li>
+                    <li><a href="#desinformacao">Desinformação</a></li>
+                    <li><a href="#guia">Guia Prático</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Navegando na Era da Inteligência Artificial</h1>
+            <p>Descubra o impacto das deepfakes e da desinformação na sociedade e aprenda a exercer sua cidadania digital com segurança.</p>
+            <a href="#guia" class="btn">Como se proteger</a>
+        </div>
+    </section>
+
+    <section id="deepfakes" class="section-padding">
+        <div class="container grid-2">
+            <div>
+                <h2>O que são Deepfakes?</h2>
+                <p>Deepfakes são vídeos, áudios ou imagens gerados por Inteligência Artificial que imitam a aparência e a voz de pessoas reais com extrema precisão.</p>
+                <p>Embora a tecnologia tenha usos legítimos no cinema, ela frequentemente é usada para criar conteúdos falsos sem consentimento, gerando fraudes financeiras e difamação.</p>
+            </div>
+            <div class="card-alerta">
+                <h3>⚠️ O Perigo do "Dividendo do Mentiroso"</h3>
+                <p>Com as deepfakes tão realistas, o maior perigo é as pessoas passarem a duvidar de fatos reais, alegando que vídeos verdadeiros "foram gerados por IA".</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="desinformacao" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center">A Desinformação Potencializada</h2>
+            <p class="text-center sub-text">A IA mudou a velocidade e a escala com que notícias falsas se espalham.</p>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Velocidade Coletiva</h4>
+                    <p>Bots e algoritmos distribuem conteúdos falsos em segundos, alcançando milhares de pessoas antes de qualquer checagem.</p>
+                </div>
+                <div class="card">
+                    <h4>Bolhas Digitais</h4>
+                    <p>As redes sociais mostram apenas o que você tende a concordar, criando um terreno fértil para mentiras convenientes.</p>
+                </div>
+                <div class="card">
+                    <h4>Manipulação Emocional</h4>
+                    <p>Notícias falsas geradas por IA apelam para o medo ou a indignação, bloqueando o pensamento racional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="guia" class="section-padding">
+        <div class="container">
+            <h2 class="text-center">Guia de Sobrevivência Digital</h2>
+            <p class="text-center sub-text">Teste seus olhos: você consegue identificar o que é real?</p>
+
+            <div class="quiz-container">
+                <div id="pergunta">
+                    <h3>Uma notícia bombástica surge no seu feed com um vídeo de um político dizendo algo absurdo. O que você faz primeiro?</h3>
+                </div>
+                <div class="quiz-opcoes">
+                    <button class="btn-opcao" onclick="verificarResposta(false)">Compartilho imediatamente para alertar meus amigos.</button>
+                    <button class="btn-opcao" onclick="verificarResposta(true)">Procuro em sites de checagem de fatos e grandes jornais antes de compartilhar.</button>
+                </div>
+                <div id="resultado-quiz" class="resultado"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Consciência Digital. Desenvolvido para a promoção da Cidadania na Web.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

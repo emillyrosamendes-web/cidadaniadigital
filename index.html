@@ -8,73 +8,86 @@
 </head>
 <body>
 
+    <div class="banner-top">💡 Espaço Educativo para a Comunidade Escolar</div>
+
     <header>
-        <h1>Cidadania Digital & Inteligência Artificial</h1>
-        <p>O Impacto das Deepfakes e da Desinformação na Sociedade Escolar</p>
+        <h1>Cidadania Digital <span class="highlight">& IA</span></h1>
+        <p>Desvendando o Impacto das Deepfakes e da Desinformação na Sociedade</p>
     </header>
 
     <nav>
-        <a href="#sobre">Sobre o Tema</a>
-        <a href="#combate">Como Identificar</a>
+        <a href="#sobre">O Problema</a>
         <a href="#analisador">Analisador de Links</a>
-        <a href="#boas-praticas">Boas Práticas</a>
+        <a href="#quiz">Desafio Fato ou Fake</a>
+        <a href="#boas-praticas">Guia de Segurança</a>
     </nav>
 
     <div class="container">
 
-        <section id="sobre">
-            <h2>Deepfakes e Desinformação: O que são?</h2>
-            <p>Com o avanço da Inteligência Artificial, tornou-se fácil criar mídias realistas, mas completamente falsas. <strong>Deepfakes</strong> são vídeos, áudios ou fotos gerados por IA que imitam pessoas reais com precisão impressionante.</p>
-            <p>Quando essas ferramentas são usadas para espalhar mentiras de forma automatizada, geram desinformação em massa, afetando o ambiente escolar e a sociedade.</p>
-        </section>
-
-        <section id="combate">
-            <h2>Como Identificar Mídias Manipuladas</h2>
+        <section id="sobre" class="fade-in">
+            <h2>O que está acontecendo na rede?</h2>
+            <p>Com o avanço rápido da Inteligência Artificial, a linha entre o real e o inventado ficou tênue. As <strong>Deepfakes</strong> (tecnologias que clonam rostos e vozes) e a desinformação automatizada circulam rapidamente em grupos de mensagens, afetando diretamente o ambiente escolar.</p>
+            
             <div class="grid">
-                <div class="card">
-                    <h3>👀 Sinais em Vídeos</h3>
-                    <ul>
-                        <li>Piscadas de olhos não naturais.</li>
-                        <li>Iluminação ou sombras estranhas no rosto.</li>
-                        <li>Bordas levemente borradas ao redor do queixo ou cabelo.</li>
-                    </ul>
+                <div class="card spec-card">
+                    <span class="card-icon">👁️</span>
+                    <h3>Sinais em Vídeos</h3>
+                    <p>Fique atento a piscadas irregulares, falhas de textura na pele e sombras desalinhadas ao redor dos olhos.</p>
                 </div>
-                <div class="card">
-                    <h3>👂 Sinais em Áudios</h3>
-                    <ul>
-                        <li>Falta de entonação emocional (voz robótica).</li>
-                        <li>Cortes abruptos ou ruídos estranhos no fundo.</li>
-                        <li>Pausas de respiração artificiais.</li>
-                    </ul>
+                <div class="card spec-card">
+                    <span class="card-icon">🎙️</span>
+                    <h3>Sinais em Áudios</h3>
+                    <p>Vozes excessivamente robóticas, falta de respiração natural e ruídos metálicos de fundo indicam clonagem.</p>
                 </div>
             </div>
         </section>
 
-        <section id="analisador">
-            <h2>Analisador Educativo de Links</h2>
-            <p>Recebeu uma notícia suspeita? Cole a URL abaixo para verificar possíveis sinais de alerta baseados em padrões comuns de golpes.</p>
+        <section id="analisador" class="interactive-section">
+            <h2>🛡️ Scanner de Links Educativo</h2>
+            <p class="section-desc">Viu uma notícia bombástica ou promoção estranha? Insira o link abaixo para rodar nossa análise de integridade algorítmica.</p>
             
-            <div class="analyzer-box">
-                <input type="text" id="linkInput" placeholder="Ex: http://ganhe-premios-gratis.net/urgente">
-                <br>
-                <button onclick="analisarLink()">Analisar Link</button>
-                <div id="result"></div>
+            <div class="analyzer-container">
+                <div class="input-group">
+                    <input type="text" id="linkInput" placeholder="Cole a URL suspeita aqui... (Ex: http://premio-gratis.net)">
+                    <button onclick="iniciarAnalise()">Escanear Link</button>
+                </div>
+                
+                <div id="loader" class="loader-box">
+                    <div class="spinner"></div>
+                    <p>Avaliando estrutura de segurança do domínio...</p>
+                </div>
+
+                <div id="result" class="result-box"></div>
+            </div>
+        </section>
+
+        <section id="quiz" class="interactive-section">
+            <h2>🎮 Desafio Interativo: Fato ou Fake?</h2>
+            <p class="section-desc">Será que você consegue identificar uma armadilha digital? Teste sua percepção abaixo:</p>
+            
+            <div class="quiz-box">
+                <p id="quiz-question" class="question-text"><strong>Caso:</strong> Você recebeu um vídeo do diretor da escola dizendo que as aulas foram canceladas para sempre, mas o movimento da boca dele parece ligeiramente atrasado em relação ao som. O que você faz?</p>
+                <div class="quiz-options">
+                    <button class="quiz-btn" onclick="responderQuiz(false)">Comemoro e espalho o vídeo imediatamente nos grupos.</button>
+                    <button class="quiz-btn" onclick="responderQuiz(true)">Desconfio de deepfake, evito repassar e procuro o site oficial da escola.</button>
+                </div>
+                <div id="quiz-feedback" class="quiz-feedback-box"></div>
             </div>
         </section>
 
         <section id="boas-praticas">
-            <h2>Boas Práticas de Cidadania Digital</h2>
-            <ul>
-                <li><strong>Pense antes de compartilhar:</strong> Se o conteúdo gera muita raiva ou surpresa, pare e suspeite.</li>
-                <li><strong>Cheque a fonte:</strong> Procure a mesma informação em veículos de comunicação confiáveis.</li>
-                <li><strong>Proteja seus dados:</strong> Nunca insira senhas ou dados pessoais em links suspeitos.</li>
-            </ul>
+            <h2>📋 Seu Guia de Cidadania Digital</h2>
+            <div class="steps-container">
+                <div class="step-item"><strong>1. Respire:</strong> Conteúdos falsos apelam para a emoção (raiva ou euforia extrema).</div>
+                <div class="step-item"><strong>2. Cruze Dados:</strong> Jogue o tema no Google. Se for real, portais grandes já terão publicado.</div>
+                <div class="step-item"><strong>3. Não Seja um Vetor:</strong> Na dúvida, quebre a corrente. Não compartilhe.</div>
+            </div>
         </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 - Projeto Escolar de Conscientização Digital.</p>
+        <p>&copy; 2026 • Conscientização e Tecnologia de Forma Responsável</p>
     </footer>
 
     <script src="script.js"></script>

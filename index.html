@@ -1,77 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infiltrados na Rede: IA e Desinformação</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<section id="guia" class="analisador-container">
+    <h2>Analisador de Links Suspeitos</h2>
+    <p>Recebeu um link duvidoso nas redes sociais ou WhatsApp? Cole ele abaixo para analisar possíveis sinais de golpe ou desinformação com IA.</p>
+    
+    <div class="input-group">
+        <input type="text" id="url-input" placeholder="Cole o link aqui (ex: http://promocao-gratis-ia.com)...">
+        <button onclick="analisarLink()">Analisar Link</button>
+    </div>
 
-    <div id="progress-bar"></div>
+    <div id="loading" class="loading-box" style="display: none;">
+        <div class="spinner"></div>
+        <p id="loading-text">Iniciando varredura heurística...</p>
+    </div>
 
-    <header>
-        <div class="container flex-header">
-            <div class="logo-glitch" data-text="REAL_OU_IA?">REAL_OU_IA?</div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#deepfakes">Deepfakes</a></li>
-                    <li><a href="#desinformacao">Efeito Dominó</a></li>
-                    <li><a href="#guia">Verificador</a></li>
-                </ul>
-            </nav>
+    <div id="resultado" class="resultado-box" style="display: none;">
+        <h3 id="resultado-titulo">Resultado da Análise</h3>
+        <p id="resultado-status"></p>
+        <div class="alertas-lista">
+            <h4>Pontos Analisados:</h4>
+            <ul id="lista-alertas"></ul>
         </div>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <span class="badge">Alerta de Cidadania Digital</span>
-            <h1 class="glitch-title">A Realidade Foi <br><span class="highlight">Hackeada.</span></h1>
-            <p>Na era das Deepfakes e da desinformação em massa por IA, os seus olhos podem te enganar. Você está pronto para descobrir a verdade?</p>
-            <a href="#deepfakes" class="btn-cyber">Iniciar Varredura <span></span></a>
-        </div>
-    </section>
-
-    <section id="deepfakes" class="section-padding">
-        <div class="container grid-2">
-            <div class="image-scanner-container">
-                <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=600" alt="Rosto Digital Inteligência Artificial" class="img-cyber">
-                <div class="scanner-line"></div>
-                <div class="scanner-text">ANALISANDO ROSTO VIRTUAL...</div>
-            </div>
-            <div>
-                <h2 class="section-title">O Teatro das Deepfakes</h2>
-                <p class="text-destaque">Vídeos falsos. Vozes clonadas. Rostos perfeitos que nunca existiram.</p>
-                <p>A Inteligência Artificial Generativa consegue recriar qualquer pessoa dizendo qualquer coisa. O que antes exigia estúdios de Hollywood, hoje é feito em segundos no celular. O perigo real não é apenas a mentira em si, mas a destruição da nossa habilidade de acreditar no que é real.</p>
-            </div>
-        </div>
-    </</section>
-
-    <section id="desinformacao" class="section-padding bg-dark">
-        <div class="container">
-            <h2 class="section-title text-center text-white">O Efeito Dominó da IA</h2>
-            <p class="text-center sub-text">Como as mentiras ganham superpoderes com algoritmos.</p>
-            
-            <div class="grid-3">
-                <div class="card-cyber" onmousemove="efeitoCard(event, this)" onmouseleave="limparCard(this)">
-                    <div class="card-icon">🚀</div>
-                    <h4>Hipervelocidade</h4>
-                    <p>Fakes se espalham 6 vezes mais rápido que a verdade. A IA automatiza o caos.</p>
-                </div>
-                <div class="card-cyber" onmousemove="efeitoCard(event, this)" onmouseleave="limparCard(this)">
-                    <div class="card-icon">🎭</div>
-                    <h4>Identidades Clonadas</h4>
-                    <p>Golpes usam a voz de familiares clonada por IA para pedir dinheiro em áudios falsos.</p>
-                </div>
-                <div class="card-cyber" onmousemove="efeitoCard(event, this)" onmouseleave="limparCard(this)">
-                    <div class="card-icon">👁️</div>
-                    <h4>Cegueira Digital</h4>
-                    <p>Quando tudo parece falso, as verdades inconvenientes começam a ser descartadas como mentiras.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id
+    </div>
+</section>

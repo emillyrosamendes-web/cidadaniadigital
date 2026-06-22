@@ -1,23 +1,82 @@
-<section id="guia" class="analisador-container">
-    <h2>Analisador de Links Suspeitos</h2>
-    <p>Recebeu um link duvidoso nas redes sociais ou WhatsApp? Cole ele abaixo para analisar possíveis sinais de golpe ou desinformação com IA.</p>
-    
-    <div class="input-group">
-        <input type="text" id="url-input" placeholder="Cole o link aqui (ex: http://promocao-gratis-ia.com)...">
-        <button onclick="analisarLink()">Analisar Link</button>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidadania Digital & IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Cidadania Digital & Inteligência Artificial</h1>
+        <p>O Impacto das Deepfakes e da Desinformação na Sociedade Escolar</p>
+    </header>
+
+    <nav>
+        <a href="#sobre">Sobre o Tema</a>
+        <a href="#combate">Como Identificar</a>
+        <a href="#analisador">Analisador de Links</a>
+        <a href="#boas-praticas">Boas Práticas</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="sobre">
+            <h2>Deepfakes e Desinformação: O que são?</h2>
+            <p>Com o avanço da Inteligência Artificial, tornou-se fácil criar mídias realistas, mas completamente falsas. <strong>Deepfakes</strong> são vídeos, áudios ou fotos gerados por IA que imitam pessoas reais com precisão impressionante.</p>
+            <p>Quando essas ferramentas são usadas para espalhar mentiras de forma automatizada, geram desinformação em massa, afetando o ambiente escolar e a sociedade.</p>
+        </section>
+
+        <section id="combate">
+            <h2>Como Identificar Mídias Manipuladas</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>👀 Sinais em Vídeos</h3>
+                    <ul>
+                        <li>Piscadas de olhos não naturais.</li>
+                        <li>Iluminação ou sombras estranhas no rosto.</li>
+                        <li>Bordas levemente borradas ao redor do queixo ou cabelo.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>👂 Sinais em Áudios</h3>
+                    <ul>
+                        <li>Falta de entonação emocional (voz robótica).</li>
+                        <li>Cortes abruptos ou ruídos estranhos no fundo.</li>
+                        <li>Pausas de respiração artificiais.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="analisador">
+            <h2>Analisador Educativo de Links</h2>
+            <p>Recebeu uma notícia suspeita? Cole a URL abaixo para verificar possíveis sinais de alerta baseados em padrões comuns de golpes.</p>
+            
+            <div class="analyzer-box">
+                <input type="text" id="linkInput" placeholder="Ex: http://ganhe-premios-gratis.net/urgente">
+                <br>
+                <button onclick="analisarLink()">Analisar Link</button>
+                <div id="result"></div>
+            </div>
+        </section>
+
+        <section id="boas-praticas">
+            <h2>Boas Práticas de Cidadania Digital</h2>
+            <ul>
+                <li><strong>Pense antes de compartilhar:</strong> Se o conteúdo gera muita raiva ou surpresa, pare e suspeite.</li>
+                <li><strong>Cheque a fonte:</strong> Procure a mesma informação em veículos de comunicação confiáveis.</li>
+                <li><strong>Proteja seus dados:</strong> Nunca insira senhas ou dados pessoais em links suspeitos.</li>
+            </ul>
+        </section>
+
     </div>
 
-    <div id="loading" class="loading-box" style="display: none;">
-        <div class="spinner"></div>
-        <p id="loading-text">Iniciando varredura heurística...</p>
-    </div>
+    <footer>
+        <p>&copy; 2026 - Projeto Escolar de Conscientização Digital.</p>
+    </footer>
 
-    <div id="resultado" class="resultado-box" style="display: none;">
-        <h3 id="resultado-titulo">Resultado da Análise</h3>
-        <p id="resultado-status"></p>
-        <div class="alertas-lista">
-            <h4>Pontos Analisados:</h4>
-            <ul id="lista-alertas"></ul>
-        </div>
-    </div>
-</section>
+    <script src="script.js"></script>
+</body>
+</html>

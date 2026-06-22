@@ -1,61 +1,88 @@
-function analisarLink() {
-    const linkInput = document.getElementById('linkInput');
+// Função para acionar o efeito visual de carregamento (Simulação de Análise)
+function iniciarAnalise() {
+    const linkInput = document.getElementById('linkInput').value.trim();
+    const loader = document.getElementById('loader');
     const resultDiv = document.getElementById('result');
-    const link = linkInput.value.trim();
-    
-    // Se o campo estiver vazio
-    if (!link) {
+
+    // Limpa resultados anteriores
+    resultDiv.style.display = 'none';
+
+    if (!linkInput) {
         resultDiv.style.display = 'block';
-        resultDiv.style.backgroundColor = '#fef08a';
-        resultDiv.style.color = '#854d0e';
-        resultDiv.innerHTML = 'Por favor, insira um link para que ele possa ser analisado.';
+        resultDiv.style.backgroundColor = '#fef3c7';
+        resultDiv.style.color = '#b45309';
+        resultDiv.innerHTML = '⚠️ Por favor, digite ou cole um endereço de site válido.';
         return;
     }
 
+    // Exibe o loader na tela
+    loader.style.display = 'block';
+
+    // Aguarda 1.5 segundos para dar a sensação de que o sistema está computando de verdade
+    setTimeout(() => {
+        loader.style.display = 'none';
+        processarAnaliseLink(linkInput, resultDiv);
+    }, 1500);
+}
+
+// Analisador heurístico interno
+function processarAnaliseLink(link, resultDiv) {
     resultDiv.style.display = 'block';
-    
     let score = 0;
     let alertas = [];
 
-    // 1. Verificação de Segurança Básica (Falta de HTTPS)
     if (link.startsWith('http://')) {
         score += 2;
-        alertas.push("O site usa 'http' em vez de 'https'. Isso significa que a conexão não é criptografada e seus dados correm risco.");
+        alertas.push("Conexão insegura detectada (HTTP padrão). Dados inseridos aqui podem ser interceptados.");
     } else if (!link.startsWith('https://')) {
         score += 1;
-        alertas.push("O link não parece ter uma estrutura web padrão configurada (falta o https://).");
+        alertas.push("Formatação incomum: links seguros começam obrigatoriamente com https://.");
     }
 
-    // 2. Verificação de Domínios comumente usados em fraudes de curto prazo
-    const extensoesSuspeitas = ['.xyz', '.net', '.info', '.click', '.top', '.tk', '.ga'];
+    const extensoesSuspeitas = ['.xyz', '.net', '.info', '.click', '.top', '.tk', '.biz'];
     extensoesSuspeitas.forEach(ext => {
         if (link.toLowerCase().includes(ext)) {
             score += 3;
-            alertas.push(`Usa a extensão de domínio (${ext}). Sites oficiais e de notícias confiáveis geralmente usam .com.br, .com ou .org.`);
+            alertas.push(`Extensão de domínio de baixo custo (${ext}). É incomum para canais de imprensa oficiais.`);
         }
     });
 
-    // 3. Verificação de palavras apelativas (Clickbait/Golpes)
-    const termosPerigosos = ['promocao', 'gratis', 'ganhe', 'urgente', 'vagas-abertas', 'exclusivo', 'bizarro', 'corra', 'premiado'];
-    termosPerigosos.forEach(termo => {
+    const termosGatilho = ['promocao', 'gratis', 'ganhe', 'urgente', 'vagas', 'exclusivo', 'bizarro', 'vaza'];
+    termosGatilho.forEach(termo => {
         if (link.toLowerCase().includes(termo)) {
             score += 2;
-            alertas.push(`Contém a palavra chamativa "${termo}", técnica muito usada para atrair cliques em notícias falsas.`);
+            alertas.push(`Gatilho emocional de urgência/recompensa identificado ("${termo}").`);
         }
     });
 
-    // Resultados com base na pontuação acumulada
+    // Renderização dos alertas dinâmicos
     if (score === 0) {
-        resultDiv.style.backgroundColor = 'var(--success-bg)';
-        resultDiv.style.color = 'var(--success)';
-        resultDiv.innerHTML = "<h3>✅ Nenhum sinal crítico detectado!</h3><p style='margin-top:5px; font-size:0.9rem;'>A estrutura inicial do link parece padrão. Contudo, sempre leia o conteúdo com senso crítico e confirme se portais de notícias sérios validam a informação.</p>";
+        resultDiv.style.backgroundColor = '#d1fae5';
+        resultDiv.style.color = '#065f46';
+        resultDiv.innerHTML = "<h3>✅ Estrutura Inicial Segura</h3><p>Nenhum indicador clássico de fraude ou clonagem foi pego no teste de domínio. Continue sempre usando seu senso crítico ao ler a matéria!</p>";
     } else if (score <= 2) {
-        resultDiv.style.backgroundColor = 'var(--warning-bg)';
-        resultDiv.style.color = 'var(--warning)';
-        resultDiv.innerHTML = "<h3>⚠️ Ponto de Atenção</h3><p>Esse link apresentou um critério suspeito leve:</p><ul style='margin-top:5px; padding-left:20px;'>" + alertas.map(a => `<li>${a}</li>`).join('') + "</ul>";
+        resultDiv.style.backgroundColor = '#fef3c7';
+        resultDiv.style.color = '#92400e';
+        resultDiv.innerHTML = "<h3>⚠️ Alerta de Atenção Moderada</h3><p>Encontramos pistas de alerta menores na URL:</p><ul style='padding-left:20px; margin-top:5px;'>" + alertas.map(a => `<li>${a}</li>`).join('') + "</ul>";
     } else {
-        resultDiv.style.backgroundColor = 'var(--danger-bg)';
-        resultDiv.style.color = 'var(--danger)';
-        resultDiv.innerHTML = "<h3>🚨 Alerta de Risco Detectado</h3><p>Este link possui características muito comuns em páginas de notícias falsas, clonadas ou golpes virtuais:</p><ul style='margin-top:5px; padding-left:20px;'>" + alertas.map(a => `<li>${a}</li>`).join('') + "</ul><p style='margin-top:5px;'><strong>Recomendação:</strong> Evite clicar ou compartilhar com seus colegas de escola.</p>";
+        resultDiv.style.backgroundColor = '#fee2e2';
+        resultDiv.style.color = '#991b1b';
+        resultDiv.innerHTML = "<h3>🚨 Alto Risco de Desinformação/Fraude</h3><p>Este link exibe traços idênticos aos usados em campanhas de boatos coordenados ou roubo de contas:</p><ul style='padding-left:20px; margin-top:5px;'>" + alertas.map(a => `<li>${a}</li>`).join('') + "</ul><p style='margin-top:10px;'><strong>Recomendação:</strong> Não dissemine e não forneça informações pessoais.</p>";
+    }
+}
+
+// Lógica do Quiz Educativo
+function responderQuiz(isCorrect) {
+    const feedbackBox = document.getElementById('quiz-feedback');
+    feedbackBox.style.display = 'block';
+
+    if (isCorrect) {
+        feedbackBox.style.backgroundColor = '#d1fae5';
+        feedbackBox.style.color = '#065f46';
+        feedbackBox.innerHTML = "🎯 Resposta Perfeita! Sinais de dessincronia na fala e no movimento labial são sintomas claros de manipulação digital por IA (Deepfakes). Checar canais centrais resguarda a comunidade.";
+    } else {
+        feedbackBox.style.backgroundColor = '#fee2e2';
+        feedbackBox.style.color = '#991b1b';
+        feedbackBox.innerHTML = "❌ Atenção! Agir por impulso espalhando mídias não validadas apenas aumenta o pânico e a desinformação. O correto é sempre conter o avanço do boato e investigar.";
     }
 }

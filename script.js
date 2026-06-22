@@ -1,46 +1,55 @@
-// 1. Barra de progresso de leitura dinâmica enquanto o usuário rola a página
-window.onscroll = function() {
-    atualizarBarraProgresso();
-};
-
-function atualizarBarraProgresso() {
-    const elementoWin = document.documentElement;
-    const scrollDoUsuario = elementoWin.scrollTop || document.body.scrollTop;
-    const alturaMaxima = elementoWin.scrollHeight - elementoWin.clientHeight;
-    const porcentagem = (scrollDoUsuario / alturaMaxima) * 100;
-    document.getElementById("progress-bar").style.width = porcentagem + "%";
-}
-
-// 2. Efeito Magnético 3D nos Cards de Informação
-function efeitoCard(evento, elemento) {
-    const boxCard = elemento.getBoundingClientRect();
-    const x = evento.clientX - boxCard.left - (boxCard.width / 2);
-    const y = evento.clientY - boxCard.top - (boxCard.height / 2);
+function analisarLink() {
+    const urlInput = document.getElementById('url-input').value.trim();
+    const loading = document.getElementById('loading');
+    const loadingText = document.getElementById('loading-text');
+    const resultado = document.getElementById('resultado');
+    const listaAlertas = document.getElementById('lista-alertas');
+    const resultadoStatus = document.getElementById('resultado-status');
     
-    // Inclina o card de acordo com a posição do mouse
-    elemento.style.transform = `perspective(1000px) rotateX(${-y / 10}deg) rotateY(${x / 10}deg) translateY(-5px)`;
-}
-
-function limparCard(elemento) {
-    elemento.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0deg)`;
-}
-
-// 3. Sistema de Feedback Interativo do Quiz de Combate às Fakes
-function rodarQuiz(respostaCorreta, botaoClicado) {
-    const painel = document.getElementById('feedback-painel');
-    painel.style.display = "block";
-    
-    // Desabilita todos os botões após a escolha
-    const botoes = document.querySelectorAll('.opt-btn');
-    botoes.forEach(btn => btn.style.pointerEvents = "none");
-
-    if (respostaCorreta) {
-        botaoClicado.style.borderColor = "var(--neon-green)";
-        painel.className = "feedback-painel feedback-sucesso";
-        painel.innerHTML = "<strong>🟢 VERIFICAÇÃO CONCLUÍDA:</strong> Excelente! Você agiu como um verdadeiro guardião digital. Analisar falhas na imagem e validar com fontes oficiais quebra o ciclo de propagação da IA maliciosa.";
-    } else {
-        botaoClicado.style.borderColor = "var(--neon-red)";
-        painel.className = "feedback-painel feedback-erro";
-        painel.innerHTML = "<strong>🔴 SISTEMA COMPROMETIDO:</strong> Atenção! Compartilhar no calor do momento é exatamente o que os criadores de deepfakes querem. Você acaba de validar uma fraude mecânica e espalhar pânico.";
+    if (!urlInput) {
+        alert("Por favor, cole um link válido para analisar.");
+        return;
     }
-}
+
+    // Esconde resultado anterior e mostra animação de carregamento
+    resultado.style.display = 'none';
+    loading.style.display = 'block';
+    listaAlertas.innerHTML = "";
+    
+    // Simulação de fases da varredura para dar dinamismo
+    setTimeout(() => { loadingText.innerText = "Checando protocolo SSL/HTTPS..."; }, 700);
+    setTimeout(() => { loadingText.innerText = "Analisando reputação do domínio contra deepfakes..."; }, 1400);
+    
+    setTimeout(() => {
+        loading.style.display = 'none';
+        resultado.style.display = 'block';
+        
+        // Remove classes anteriores
+        resultado.className = "resultado-box";
+        
+        let alertas = [];
+        let nivelPerigo = 0; // 0 = Seguro, 1 = Atenção, 2 = Perigo
+
+        const urlMinuscula = urlInput.toLowerCase();
+
+        // Regra 1: Segurança básica (HTTPS)
+        if (!urlMinuscula.startsWith('https://')) {
+            alertas.push("❌ <strong>Falta de Criptografia:</strong> Este site não usa conexão segura (HTTPS). Dados digitados aqui podem ser interceptados facilmente.");
+            nivelPerigo = Math.max(nivelPerigo, 1);
+        } else {
+            alertas.push("✅ Conexão segura (HTTPS) detectada.");
+        }
+
+        // Regra 2: Gatilhos de golpes comuns de phishing e desinformação
+        const gatilhos = ['promocao', 'brinde', 'ganhe', 'vaga-urgente', 'sacar', 'auxilio', 'g1-noticias-fake', 'fofoca', 'urgente'];
+        let encontrouGatilho = gatilhos.filter(palavra => urlMinuscula.includes(palavra));
+        
+        if (encontrouGatilho.length > 0) {
+            alertas.push(`⚠️ <strong>Termos Suspeitos:</strong> O link contém palavras comumente usadas em golpes digitais ou clickbaits (${encontrouGatilho.join(', ')}).`);
+            nivelPerigo = 2;
+        }
+
+        // Regra 3: Extensões de domínio estranhas ou falsificadas
+        if (urlMinuscula.includes('.xyz') || urlMinuscula.includes('.online') || urlMinuscula.includes('.free') || urlMinuscula.includes('.top')) {
+            alertas.push("❌ <strong>Domínio de Baixo Custo:</strong> Extensões como .xyz, .online ou .top são frequentemente usadas por golpistas para criar sites temporários que espalham desinformação gerada por IA.");
+            nivelPerigo =
